@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- 2. Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400&display=swap" rel="stylesheet">
+    
+    <!-- Smooth scrolling (CSS for modern browsers) -->
+    <style>
+        /* Prefer native smooth scrolling where supported */
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+<body>
+
+    <style>
+    /* Inline enhancements: make header icon buttons uniform and polish auth forms */
+    .icon-button, .wishlist-button, .cart-button {
+        width:44px;
+        height:44px;
+        border-radius:50%;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        background:#222;
+        color:#fff;
+        border:0;
+        box-shadow:0 6px 14px rgba(0,0,0,0.18);
+        font-size:16px;
+        cursor:pointer;
+        right: 4rem;
+    }
+    .icon-button i, .wishlist-button i, .cart-button i { font-size:18px;}
+    .search-container { display:flex; align-items:center; gap:px; right: 12.5rem;}
+
+    /* Auth form polish */
+    .auth-panel--large { max-width:920px; border-radius:12px; overflow:hidden; box-shadow:0 30px 60px rgba(6,10,15,0.35); }
+    .auth-hero { background:linear-gradient(135deg,#2f7a2f 0%, #87d13a 100%); color:#fff; padding:44px 40px; display:flex; flex-direction:column; justify-content:center; gap:12px; }
+    .auth-hero .hero-brand{ opacity:0.95; font-weight:700; letter-spacing:1px; }
+    .auth-hero .hero-title{ font-size:34px; margin:6px 0; color:#eaff8f; }
+    .auth-hero .hero-sub{ opacity:0.95; max-width:320px; }
+    .auth-forms { padding:28px 32px; background:#fff; }
+    .auth-forms .auth-tab{ background:transparent; border:0; padding:10px 18px; font-weight:700; color:#333; }
+    .auth-forms .auth-content { margin-top:12px; }
+    .auth-field input { width:100%; padding:12px 14px; border-radius:8px; border:1px solid #e6e6e6; box-shadow:inset 0 1px 2px rgba(0,0,0,0.03); font-size:14px; }
+    .auth-field { display:block; margin-bottom:12px; }
+    .social-buttons { display:flex; gap:10px; margin-bottom:12px; }
+    .social-btn { flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:10px; border-radius:8px; border:1px solid #eee; background:#fff; cursor:pointer; }
+    .or-sep { text-align:center; color:#9aa; margin:6px 0 12px; font-size:13px; }
+    .auth-submit { width:100%; padding:12px; border-radius:10px; border:0; font-weight:800; color:#102; background:linear-gradient(90deg,#b7ff42,#6bbf00); box-shadow:0 8px 18px rgba(107,191,0,0.18); cursor:pointer; }
+    .toggle-pass { background:transparent; border:0; color:#666; font-weight:700; cursor:pointer; }
+    .auth-close{ position:absolute; right:14px; top:12px; background:transparent; border:0; font-size:22px; color:#333; }
+    @media (max-width:720px){ .auth-panel--large{ max-width:92%; } .auth-hero{ display:none; } }
+    </style>
+
+    <header class="text-slider-container">
+        
+        <!-- This wrapper is just for structure, not movement -->
+        <div class="text-slider-wrapper">
+            
+            <!-- Slide 1 -->
+            <div class="text-slide active">
+                <span>FREE SHIPPING ON ORDERS OVER Rs. 5,000</span>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="text-slide">
+                <span>NEW WINTER COLLECTION ARRIVING SOON</span>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="text-slide">
+                <span>SIGN UP & GET 10% OFF YOUR FIRST ORDER</span>
+            </div>
+
+        </div>
+
+        <!-- Arrow Buttons -->
+        <button class="slider-arrow prev" id="prevText" aria-label="Previous note">&#10094;</button>
+        <button class="slider-arrow next" id="nextText" aria-label="Next note">&#10095;</button>
+        
+    </header>
+
+    <!-- 8. Corrected HTML Structure -->
+    <nav class="nav_top" role="navigation" aria-label="Primary">
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <h2>OUR STORE</h2>
+            
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <svg width="22" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+        </div>
+
+        <ul id="primary-navigation" class="nav_links" role="menubar" aria-hidden="true">
+          <li role="none"><a role="menuitem" href="#" id="icons">Home</a></li>
+          <li role="none"><a role="menuitem" href="#">About Us</a></li>
+          <li role="none"><a role="menuitem" href="#">Services</a></li>
+          <li role="none"><a role="menuitem" href="#">Contact Us</a></li>
+        </ul>
+      
+                <div class="search-container" role="search">
+                    <input type="text" placeholder="Search..." aria-label="Search site">
+                    <button type="submit" class="icon-button" aria-label="Submit search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+
+                <!-- Wishlist Button -->
+                <div class="wishlist-container">
+                        <button class="icon-button wishlist-button" aria-label="Open wishlist">
+                                <i class="fa-regular fa-heart"></i>
+                                <span class="wishlist-count">0</span>
+                        </button>
+                </div>
+
+                <!-- Cart Button -->
+                <div class="cart-container">
+                    <button class="icon-button cart-button" aria-label="Open shopping cart">
+                        <i class="fa-solid fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+
+                <!-- Account / Profile Button (same size as other icons) -->
+                <div class="account-container">
+                        <button class="icon-button account-button" aria-label="Open account">
+                                <i class="fa-regular fa-user" aria-hidden="true"></i>
+                        </button>
+                </div>
+        
+        <!-- Cart Overlay -->
+        <div class="cart-overlay">
+          <div class="cart-panel">
+            <div class="cart-header">
+              <h3>Shopping Cart</h3>
+              <button class="cart-close" aria-label="Close cart">&times;</button>
+            </div>
+            <div class="cart-items">
+              <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-footer">
+              <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount">Rs: 0.00</span>
+              </div>
+              <button class="checkout-button">Proceed to Checkout</button>
+            </div>
+          </div>
+        </div>
+                <!-- Auth (Login / Sign Up) Overlay - upgraded design -->
+                <div class="auth-overlay" aria-hidden="true">
+                    <div class="auth-panel auth-panel--large">
+                        <button class="auth-close" aria-label="Close authentication">&times;</button>
+                        <div class="auth-inner">
+                            <div class="auth-hero" aria-hidden="true">
+                                <div class="hero-brand">OUR STORE</div>
+                                <h2 class="hero-title">Welcome back</h2>
+                                <p class="hero-sub">Create an account or sign in to access your wishlist, save favorites, and checkout faster.</p>
+                                <img src="images/auth-hero.png" alt="Shopping illustration" class="hero-image" onerror="this.style.display='none'">
+                            </div>
+
+                            <div class="auth-forms">
+                                <div class="auth-tabs">
+                                    <button class="auth-tab active" data-tab="login">Login</button>
+                                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                                </div>
+
+                                <div class="auth-contents">
+                                    <form class="auth-content auth-login active" aria-label="Login form">
+                                        <div class="social-buttons">
+                                            <button type="button" class="social-btn google"> <i class="fa-brands fa-google"></i> Continue with Google</button>
+                                            <button type="button" class="social-btn facebook"> <i class="fa-brands fa-facebook-f"></i> Continue with Facebook</button>
+                                        </div>
+
+                                        <div class="or-sep"><span>Or use email</span></div>
+
+                                        <label class="auth-field">
+                                            <input type="email" name="loginEmail" placeholder="Email address" required>
+                                        </label>
+
+                                        <label class="auth-field password-field">
+                                            <input type="password" name="loginPassword" placeholder="Password" required>
+                                            <button type="button" class="toggle-pass" aria-label="Show password">Show</button>
+                                        </label>
+
+                                        <div class="auth-actions">
+                                            <label class="remember">
+                                                <input type="checkbox" name="remember"> Remember me
+                                            </label>
+                                            <a href="#" class="forgot-link">Forgot?</a>
+                                        </div>
+
+                                        <button type="submit" class="auth-submit">Sign in</button>
+                                    </form>
+
+                                    <form class="auth-content auth-signup" aria-label="Signup form">
+                                        <div class="social-buttons">
+                                            <button type="button" class="social-btn google"> <i class="fa-brands fa-google"></i> Sign up with Google</button>
+                                            <button type="button" class="social-btn facebook"> <i class="fa-brands fa-facebook-f"></i> Sign up with Facebook</button>
+                                        </div>
+
+                                        <div class="or-sep"><span>Or use your email</span></div>
+
+                                        <label class="auth-field">
+                                            <input type="text" name="signupName" placeholder="Full name" required>
+                                        </label>
+
+                                        <label class="auth-field">
+                                            <input type="email" name="signupEmail" placeholder="Email address" required>
+                                        </label>
+
+                                        <label class="auth-field">
+                                            <input type="tel" name="signupPhone" placeholder="Phone (optional)">
+                                        </label>
+
+                                        <label class="auth-field password-field">
+                                            <input type="password" name="signupPassword" placeholder="Create password" required>
+                                            <button type="button" class="toggle-pass" aria-label="Show password">Show</button>
+                                        </label>
+
+                                        <label class="auth-field password-field">
+                                            <input type="password" name="signupPasswordConfirm" placeholder="Confirm password" required>
+                                            <button type="button" class="toggle-pass" aria-label="Show password">Show</button>
+                                        </label>
+
+                                        <label class="auth-field">
+                                            <input type="date" name="signupDob" placeholder="Date of birth (optional)">
+                                        </label>
+
+                                        <label class="auth-field checkbox-field">
+                                            <input type="checkbox" name="signupTos" required> I agree to the Terms & Privacy
+                                        </label>
+
+                                        <button type="submit" class="auth-submit">Create account</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Overlay -->
+                <div class="wishlist-overlay">
+                    <div class="wishlist-panel">
+                        <div class="wishlist-header">
+                            <h3>Wishlist</h3>
+                            <button class="wishlist-close" aria-label="Close wishlist">&times;</button>
+                        </div>
+                        <div class="wishlist-items">
+                            <!-- Wishlist items render here -->
+                        </div>
+                        <div class="wishlist-footer">
+                            <p class="wishlist-empty">Your wishlist is empty</p>
+                        </div>
+                    </div>
+                </div>
+    </nav>
+
+    <!-- This is the main slider container -->
+    <div class="slider-container">
+        
+        <!-- This wrapper holds all the slides -->
+        <div class="slider-wrapper">
+            
+            <!-- Slide 1 -->
+            <!-- The slide is now empty because the image is a background -->
+            <div class="slide" id="slide-1"></div>
+            
+            <!-- Slide 2 -->
+            <div class="slide" id="slide-2"></div>
+            
+            <!-- Slide 3 -->
+            <div class="slide" id="slide-3"></div>
+
+            <!-- Slide 4 (Duplicate of 1 for seamless loop) -->
+            <div class="slide" id="slide-4"></div>
+
+        </div>
+
+        <!-- Navigation dots -->
+        <!-- <div class="slider-nav">
+            <a href="#slide-1"></a>
+            <a href="#slide-2"></a>
+            <a href="#slide-3"></a>
+            <a href="#slide-4"></a>
+        </div> -->
+
+        <section class="category-section">
+        <h3>Shop by Category</h3>
+
+        <div class="category-slider">
+            <div class="slider-track">
+                
+                <!-- 1. The ORIGINAL set of items -->
+                <div class="category-item">
+                    <img src="https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309643.jpg?semt=ais_hybrid&w=740&q=80" alt="Category 1">
+                    <span>Electronics</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg?cs=srgb&dl=pexels-anastasiya-gepp-654466-1462637.jpg&fm=jpg" alt="Category 2">
+                    <span>Fashion</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://ankoglobal.com/images/category-banner.jpg" alt="Category 3">
+                    <span>Home Goods</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmVhdXR5JTIwcHJvZHVjdHN8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" alt="Category 4">
+                    <span>Beauty</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://img.freepik.com/free-vector/soccer-volleyball-baseball-rugby-equipment_1441-4026.jpg?semt=ais_hybrid&w=740&q=80" alt="Category 5">
+                    <span>Sports</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://img.freepik.com/free-vector/hand-drawn-flat-stack-books_23-2149323626.jpg" alt="Category 6">
+                    <span>Books</span>
+                </div>
+
+                <!-- 2. The DUPLICATE set of items (for seamless loop) -->
+                <div class="category-item">
+                    <img src="https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309643.jpg?semt=ais_hybrid&w=740&q=80" alt="Category 1">
+                    <span>Electronics</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg?cs=srgb&dl=pexels-anastasiya-gepp-654466-1462637.jpg&fm=jpg" alt="Category 2">
+                    <span>Fashion</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://ankoglobal.com/images/category-banner.jpg" alt="Category 3">
+                    <span>Home Goods</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmVhdXR5JTIwcHJvZHVjdHN8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" alt="Category 4">
+                    <span>Beauty</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://img.freepik.com/free-vector/soccer-volleyball-baseball-rugby-equipment_1441-4026.jpg?semt=ais_hybrid&w=740&q=80" alt="Category 5">
+                    <span>Sports</span>
+                </div>
+                <div class="category-item">
+                    <img src="https://img.freepik.com/free-vector/hand-drawn-flat-stack-books_23-2149323626.jpg" alt="Category 6">
+                    <span>Books</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="product-showcase">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+
+            <!-- Card 1 -->
+            <div class="product-card" 
+                 data-title="Luxury Timepiece" 
+                 data-price="Rs. 49,999" 
+                 data-img="https://placehold.co/600x600/e74c3c/ffffff?text=Product+1" 
+                 data-colors="#e74c3c,#34495e,#ecf0f1"
+                 data-desc="A beautifully crafted timepiece for the modern connoisseur. Features a stainless steel case, sapphire crystal glass, and automatic movement.">
+                
+                <div class="product-image">
+                    <img src="https://placehold.co/300x300/e74c3c/ffffff?text=Product+1" alt="Product 1">
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <span class="product-category">Watches</span>
+                        <h4 class="product-title">Luxury Timepiece</h4>
+                        <div class="product-price">Rs: 49,999</div>
+                        <div class="color-swatches">
+                            <span class="color-swatch" style="background-color: #e74c3c;"></span>
+                            <span class="color-swatch" style="background-color: #34495e;"></span>
+                            <span class="color-swatch" style="background-color: #ecf0f1;"></span>
+                        </div>
+                    </div>
+                    <a href="#" class="product-button">Quick View</a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="product-card"
+                 data-title="Leather Handbag"
+                 data-price="Rs: 12,499"
+                 data-img="https://placehold.co/600x600/3498db/ffffff?text=Product+2"
+                 data-colors="#3498db,#9b59b6,#000000"
+                 data-desc="Genuine Italian leather handbag. Perfect for both work and casual outings, with multiple compartments and a detachable strap.">
+                
+                <div class="product-image">
+                    <img src="https://placehold.co/300x300/3498db/ffffff?text=Product+2" alt="Product 2">
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <span class="product-category">Accessories</span>
+                        <h4 class="product-title">Leather Handbag</h4>
+                        <div class="product-price">Rs: 12,499</div>
+                        <div class="color-swatches">
+                            <span class="color-swatch" style="background-color: #3498db;"></span>
+                            <span class="color-swatch" style="background-color: #9b59b6;"></span>
+                            <span class="color-swatch" style="background-color: #000000;"></span>
+                        </div>
+                    </div>
+                    <a href="#" class="product-button">Quick View</a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="product-card"
+                 data-title="Premium Headphones"
+                 data-price="Rs: 22,990"
+                 data-img="https://placehold.co/600x600/2ecc71/ffffff?text=Product+3"
+                 data-colors="#2ecc71,#ecf0f1,#34495e"
+                 data-desc="Noise-cancelling over-ear headphones with 30-hour battery life. Crystal-clear audio and plush memory foam earcups for all-day comfort.">
+                
+                <div class="product-image">
+                    <img src="https://placehold.co/300x300/2ecc71/ffffff?text=Product+3" alt="Product 3">
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <span class="product-category">Electronics</span>
+                        <h4 class="product-title">Premium Headphones</h4>
+                        <div class="product-price">Rs: 22,990</div>
+                        <div class="color-swatches">
+                            <span class="color-swatch" style="background-color: #2ecc71;"></span>
+                            <span class="color-swatch" style="background-color: #ecf0f1;"></span>
+                            <span class="color-swatch" style="background-color: #34495e;"></span>
+                        </div>
+                    </div>
+                    <a href="#" class="product-button">Quick View</a>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="product-card"
+                 data-title="Designer Sunglasses"
+                 data-price="Rs: 9,500"
+                 data-img="https://placehold.co/600x600/f1c40f/ffffff?text=Product+4"
+                 data-colors="#000000,#f1c40f"
+                 data-desc="Stylish sunglasses with 100% UV protection. Lightweight frame and polarized lenses to reduce glare. Includes a premium case.">
+                
+                <div class="product-image">
+                    <img src="https://placehold.co/300x300/f1c40f/ffffff?text=Product+4" alt="Product 4">
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <span class="product-category">Eyewear</span>
+                        <h4 class="product-title">Designer Sunglasses</h4>
+                        <div class="product-price">Rs: 9,500</div>
+                        <div class="color-swatches">
+                            <span class="color-swatch" style="background-color: #000000;"></span>
+                            <span class="color-swatch" style="background-color: #f1c40f;"></span>
+                        </div>
+                    </div>
+                    <a href="#" class="product-button">Quick View</a>
+                </div>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="product-card"
+                 data-title="Silk Scarf"
+                 data-price="Rs: 4,200"
+                 data-img="https://placehold.co/600x600/9b59b6/ffffff?text=Product+5"
+                 data-colors="#9b59b6,#e74c3c,#1abc9c"
+                 data-desc="100% pure Mulberry silk scarf. Hand-rolled edges and a beautiful, vibrant print. A versatile accessory for any season.">
+                
+                <div class="product-image">
+                    <img src="https://placehold.co/300x300/9b59b6/ffffff?text=Product+5" alt="Product 5">
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <span class="product-category">Accessories</span>
+                        <h4 class="product-title">Silk Scarf</h4>
+                        <div class="product-price">Rs: 4,200</div>
+                        <div class="color-swatches">
+                            <span class="color-swatch" style="background-color: #9b59b6;"></span>
+                            <span class="color-swatch" style="background-color: #e74c3c;"></span>
+                            <span class="color-swatch" style="background-color: #1abc9c;"></span>
+                        </div>
+                    </div>
+                    <a href="#" class="product-button">Quick View</a>
+                </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="product-card"
+                 data-title="Smart Speaker"
+                 data-price="Rs: 8,999"
+                 data-img="https://placehold.co/600x600/1abc9c/ffffff?text=Product+6"
+                 data-colors="#1abc9c,#34495e,#ecf0f1"
+                 data-desc="A voice-controlled smart speaker with 360-degree audio. Play music, check the weather, and control your smart home.">
+                
+                <div class="product-image">
+                    <img src="https://placehold.co/300x300/1abc9c/ffffff?text=Product+6" alt="Product 6">
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <span class="product-category">Electronics</span>
+                        <h4 class="product-title">Smart Speaker</h4>
+                        <div class="product-price">Rs: 8,999</div>
+                        <div class="color-swatches">
+                            <span class="color-swatch" style="background-color: #1abc9c;"></span>
+                            <span class="color-swatch" style="background-color: #34495e;"></span>
+                            <span class="color-swatch" style="background-color: #ecf0f1;"></span>
+                        </div>
+                    </div>
+                    <a href="#" class="product-button">Quick View</a>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="product-card"
+                 data-title="Espresso Machine"
+                 data-price="Rs: 34,990"
+                 data-img="https://placehold.co/600x600/e67e22/ffffff?text=Product+7"
+                 data-colors="#e67e22,#bdc3c7,#000"
+                 data-desc="Barista-grade espresso machine with a built-in grinder. Create lattes, cappuccinos, and more with the powerful steam wand.">
+
+                <div class="product-image">
+                    <img src="https://placehold.co/300x300/e67e22/ffffff?text=Product+7" alt="Product 7">
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <span class="product-category">Appliances</span>
+                        <h4 class="product-title">Espresso Machine</h4>
+                        <div class="product-price">Rs: 34,990</div>
+                        <div class="color-swatches">
+                            <span class="color-swatch" style="background-color: #e67e22;"></span>
+                            <span class="color-swatch" style="background-color: #bdc3c7;"></span>
+                            <span class="color-swatch" style="background-color: #000;"></span>
+                        </div>
+                    </div>
+                    <a href="#" class="product-button">Quick View</a>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="product-card"
+                 data-title="Leather Boots"
+                 data-price="Rs: 18,999"
+                 data-img="https://placehold.co/600x600/34495e/ffffff?text=Product+8"
+                 data-colors="#34495e,#7f5539"
+                 data-desc="Classic leather boots made with full-grain leather and a durable Goodyear welt. Timeless style and built to last.">
+                
+                <div class="product-image">
+                    <img src="https://placehold.co/300x300/34495e/ffffff?text=Product+8" alt="Product 8">
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <span class="product-category">Footwear</span>
+                        <h4 class="product-title">Leather Boots</h4>
+                        <div class="product-price">Rs: 18,999</div>
+                        <div class="color-swatches">
+                            <span class="color-swatch" style="background-color: #34495e;"></span>
+                            <span class="color-swatch" style="background-color: #7f5539;"></span>
+                        </div>
+                    </div>
+                    <a href="#" class="product-button">Quick View</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="view-all-container">
+            <a href="#" class="view-all-button">View All Products</a>
+        </div>
+    </section>
+
+    <!-- 
+      --- THE PRODUCT MODAL ---
+      This is hidden by default and filled with data from the card that was clicked.
+    -->
+    <div id="productModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            
+            <!-- Column 1: Image -->
+            <img src="" alt="Product Image" class="modal-image" id="modalImg">
+            
+            <!-- Column 2: Info -->
+            <div class="modal-info">
+                <h2 class="modal-product-title" id="modalTitle">Product Title</h2>
+                <div class="modal-product-price" id="modalPrice">Rs: 0</div>
+                <p class="modal-product-description" id="modalDesc">Product description...</p>
+                
+                <div class="modal-options-title">Color</div>
+                <div class="modal-color-swatches" id="modalColors">
+                    <!-- Color swatches will be dynamically inserted here -->
+                </div>
+                
+                <div class="modal-options-title">Quantity</div>
+                <div class="quantity-selector">
+                    <button class="quantity-btn minus" id="quantityMinus" aria-label="Decrease quantity">-</button>
+                    <input type="number" class="quantity-input" id="quantityInput" value="1" min="1">
+                    <button class="quantity-btn plus" id="quantityPlus" aria-label="Increase quantity">+</button>
+                </div>
+                
+                <div class="modal-button-group">
+                    <button class="modal-button add-cart">Add to Cart</button>
+                    <button class="modal-button buy-now">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JAVASCRIPT for MODAL -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Get all the elements we need
+            const modal = document.getElementById('productModal');
+            const closeModalBtn = document.querySelector('.modal-close');
+            const productCards = document.querySelectorAll('.product-card');
+
+            // Modal content elements to update
+            const modalImg = document.getElementById('modalImg');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalPrice = document.getElementById('modalPrice');
+            const modalDesc = document.getElementById('modalDesc');
+            const modalColorsContainer = document.getElementById('modalColors');
+
+            // Quantity selector elements
+            const quantityInput = document.getElementById('quantityInput');
+            const quantityMinus = document.getElementById('quantityMinus');
+            const quantityPlus = document.getElementById('quantityPlus');
+
+            // --- 1. Open Modal Logic ---
+            productCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // Don't open modal if wishlist icon was clicked
+                    if (e.target.closest('.wishlist-icon')) {
+                        return;
+                    }
+                    
+                    // Prevent the "Quick View" link from navigating
+                    e.preventDefault();
+
+                    // Get data from the clicked card's data- attributes
+                    const title = card.dataset.title;
+                    const price = card.dataset.price;
+                    const img = card.dataset.img;
+                    const desc = card.dataset.desc;
+                    const colors = card.dataset.colors.split(',');
+
+                    // Populate the modal with the data
+                    modalTitle.textContent = title;
+                    modalPrice.textContent = price;
+                    modalImg.src = img;
+                    modalDesc.textContent = desc;
+
+                    // Populate color swatches
+                    modalColorsContainer.innerHTML = ''; // Clear old swatches
+                    colors.forEach((color, index) => {
+                        const swatch = document.createElement('span');
+                        swatch.className = 'modal-color-swatch';
+                        swatch.style.backgroundColor = color;
+                        // Make the first one active by default
+                        if (index === 0) {
+                            swatch.classList.add('active');
+                        }
+                        modalColorsContainer.appendChild(swatch);
+                    });
+
+                    // Reset quantity
+                    quantityInput.value = '1';
+
+                    // Show the modal
+                    modal.style.display = 'block';
+                });
+            });
+
+            // --- 2. Close Modal Logic ---
+            const closeModal = () => {
+                modal.style.display = 'none';
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            // Close when clicking on the background overlay
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // --- 3. Quantity Selector Logic ---
+            quantityMinus.addEventListener('click', () => {
+                let currentValue = parseInt(quantityInput.value, 10);
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                }
+            });
+
+            quantityPlus.addEventListener('click', () => {
+                let currentValue = parseInt(quantityInput.value, 10);
+                quantityInput.value = currentValue + 1;
+            });
+            
+            // --- 4. Modal Color Swatch Logic ---
+            // We use event delegation since swatches are created dynamically
+            modalColorsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal-color-swatch')) {
+                    // Remove 'active' from all swatches
+                    modalColorsContainer.querySelectorAll('.modal-color-swatch').forEach(swatch => {
+                        swatch.classList.remove('active');
+                    });
+                    // Add 'active' to the clicked one
+                    e.target.classList.add('active');
+                }
+            });
+
+            // Cart Functionality
+            const cartButton = document.querySelector('.cart-button');
+            const cartOverlay = document.querySelector('.cart-overlay');
+            const cartPanel = document.querySelector('.cart-panel');
+            const cartClose = document.querySelector('.cart-close');
+            const cartItems = document.querySelector('.cart-items');
+            const cartCount = document.querySelector('.cart-count');
+            const totalAmount = document.querySelector('.total-amount');
+            const addToCartButtons = document.querySelectorAll('.modal-button.add-cart');
+            
+            /* Wishlist elements */
+            const wishlistButton = document.querySelector('.wishlist-button');
+            const wishlistOverlay = document.querySelector('.wishlist-overlay');
+            const wishlistPanel = document.querySelector('.wishlist-panel');
+            const wishlistClose = document.querySelector('.wishlist-close');
+            const wishlistItemsContainer = document.querySelector('.wishlist-items');
+            const wishlistCountEl = document.querySelector('.wishlist-count');
+            
+            let cart = [];
+            let wishlist = [];
+
+            // Open cart
+            cartButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                cartOverlay.classList.add('active');
+                cartPanel.style.right = '0';
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Close cart
+            cartClose.addEventListener('click', () => {
+                closeCart();
+            });
+
+            // Close cart when clicking overlay
+            cartOverlay.addEventListener('click', (e) => {
+                if (e.target === cartOverlay) {
+                    closeCart();
+                }
+            });
+
+            // Wishlist open/close
+            if (wishlistButton) {
+                wishlistButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    wishlistOverlay.classList.add('active');
+                    wishlistPanel.style.right = '0';
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            if (wishlistClose) {
+                wishlistClose.addEventListener('click', () => {
+                    wishlistOverlay.classList.remove('active');
+                    wishlistPanel.style.right = '-400px';
+                    document.body.style.overflow = '';
+                });
+            }
+
+            wishlistOverlay.addEventListener('click', (e) => {
+                if (e.target === wishlistOverlay) {
+                    wishlistOverlay.classList.remove('active');
+                    wishlistPanel.style.right = '-400px';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            function renderWishlist() {
+                wishlistCountEl.textContent = wishlist.length;
+                if (wishlist.length === 0) {
+                    wishlistItemsContainer.innerHTML = `
+                        <div class="empty-wishlist">
+                            <i class="fa-regular fa-heart"></i>
+                            <p>Your wishlist is empty</p>
+                        </div>`;
+                    return;
+                }
+
+                wishlistItemsContainer.innerHTML = wishlist.map(item => `
+                    <div class="wishlist-item" data-id="${item.id}">
+                        <img src="${item.image}" alt="${item.title}" class="wishlist-item-image">
+                        <div class="wishlist-item-details">
+                            <span class="wishlist-item-title">${item.title}</span>
+                            <span class="wishlist-item-price">${item.price}</span>
+                        </div>
+                        <button class="wishlist-item-remove" onclick="removeFromWishlist('${item.id}')">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            function addToWishlist(product) {
+                const exists = wishlist.find(i => i.id === product.id);
+                if (exists) return; // avoid duplicates
+                wishlist.push(product);
+                renderWishlist();
+                // small toast
+                const n = document.createElement('div');
+                n.className = 'cart-notification';
+                n.textContent = 'Added to wishlist';
+                document.body.appendChild(n);
+                setTimeout(() => { n.classList.add('show'); setTimeout(()=>{ n.classList.remove('show'); setTimeout(()=>n.remove(),300); }, 1200); }, 50);
+            }
+
+            window.removeFromWishlist = function(id) {
+                wishlist = wishlist.filter(i => i.id !== id);
+                renderWishlist();
+            };
+
+            // --- Authentication helpers ---
+            const accountButton = document.querySelector('.account-button');
+            const authOverlayEl = document.querySelector('.auth-overlay');
+            const authPanel = document.querySelector('.auth-panel');
+            const authCloseBtn = document.querySelector('.auth-close');
+            const authTabs = document.querySelectorAll('.auth-tab');
+            const authContents = document.querySelectorAll('.auth-content');
+            const loginForm = document.querySelector('.auth-login');
+            const signupForm = document.querySelector('.auth-signup');
+            let pendingAction = null;
+
+            function getStoredUsers(){
+                try { return JSON.parse(localStorage.getItem('users') || '[]'); } catch(e){ return []; }
+            }
+
+            function saveUsers(list){ localStorage.setItem('users', JSON.stringify(list || [])); }
+
+            function setSession(user){ localStorage.setItem('sessionUser', JSON.stringify(user || null)); updateAccountUI(); }
+            function getSession(){ try { return JSON.parse(localStorage.getItem('sessionUser') || 'null'); } catch(e){ return null; } }
+            function isLoggedIn(){ return !!getSession(); }
+
+            function updateAccountUI(){
+                const user = getSession();
+                if(accountButton){
+                    if(user){
+                        const initials = user.name ? user.name.split(' ').map(n=>n[0]).slice(0,2).join('').toUpperCase() : '';
+                        accountButton.innerHTML = `<span class="account-avatar">${initials}</span><span class="visually-hidden">Account menu</span>`;
+                        accountButton.setAttribute('aria-expanded','false');
+                    } else {
+                        accountButton.innerHTML = '<span class="account-icon" aria-hidden="true"><i class="fa-regular fa-user"></i></span><span class="account-label visually-hidden">Account</span>';
+                        accountButton.setAttribute('aria-expanded','false');
+                    }
+                }
+                // Update wishlist/cart UI if needed
+            }
+
+            function openAuth(tab = 'login'){
+                if(!authOverlayEl) return;
+                authOverlayEl.classList.add('active');
+                authOverlayEl.setAttribute('aria-hidden','false');
+                // tab switching
+                authTabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+                authContents.forEach(c => c.classList.toggle('active', c.classList.contains(`auth-${tab}`)));
+            }
+
+            function closeAuth(){
+                if(!authOverlayEl) return;
+                authOverlayEl.classList.remove('active');
+                authOverlayEl.setAttribute('aria-hidden','true');
+            }
+
+            // Click account button: open login if not logged in, otherwise log out
+            if(accountButton){
+                accountButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if(isLoggedIn()){
+                        // quick logout for now
+                        if(confirm('Sign out?')){ setSession(null); }
+                    } else {
+                        openAuth('login');
+                    }
+                });
+            }
+
+            if(authCloseBtn){ authCloseBtn.addEventListener('click', closeAuth); }
+            // clicking outside panel closes
+            if(authOverlayEl){ authOverlayEl.addEventListener('click', (e) => { if(e.target === authOverlayEl) closeAuth(); }); }
+
+            // tab clicks
+            authTabs.forEach(tab => tab.addEventListener('click', () => {
+                openAuth(tab.dataset.tab);
+            }));
+
+            // Password show/hide toggle
+            document.addEventListener('click', (e) => {
+                if(e.target && e.target.classList && e.target.classList.contains('toggle-pass')){
+                    const btn = e.target;
+                    const wrapper = btn.closest('.password-field');
+                    const input = wrapper && wrapper.querySelector('input');
+                    if(!input) return;
+                    if(input.type === 'password'){ input.type = 'text'; btn.textContent = 'Hide'; }
+                    else { input.type = 'password'; btn.textContent = 'Show'; }
+                }
+            });
+
+            // focus the first input when auth opens
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach(m => {
+                    if(m.attributeName === 'class'){
+                        if(authOverlayEl.classList.contains('active')){
+                            const first = authOverlayEl.querySelector('.auth-content.active input');
+                            if(first) first.focus();
+                        }
+                    }
+                });
+            });
+            if(authOverlayEl) observer.observe(authOverlayEl, { attributes: true });
+
+            // Login form
+            if(loginForm){
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = loginForm.querySelector('input[name="loginEmail"]').value.trim().toLowerCase();
+                    const pass = loginForm.querySelector('input[name="loginPassword"]').value;
+                    const users = getStoredUsers();
+                    const user = users.find(u => u.email === email && u.password === pass);
+                    if(user){
+                        setSession(user);
+                        closeAuth();
+                        if(typeof pendingAction === 'function'){ pendingAction(); pendingAction = null; }
+                    } else {
+                        // nicer in-form feedback
+                        const err = document.createElement('div'); err.className='auth-error'; err.textContent='Invalid email or password';
+                        const existing = loginForm.querySelector('.auth-error'); if(existing) existing.remove();
+                        loginForm.prepend(err);
+                        setTimeout(()=>{ err.remove(); }, 3000);
+                    }
+                });
+            }
+
+            // Signup form
+            if(signupForm){
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = signupForm.querySelector('input[name="signupName"]').value.trim();
+                    const email = signupForm.querySelector('input[name="signupEmail"]').value.trim().toLowerCase();
+                    const pass = signupForm.querySelector('input[name="signupPassword"]').value;
+                    const pass2 = signupForm.querySelector('input[name="signupPasswordConfirm"]').value;
+                    const tos = signupForm.querySelector('input[name="signupTos"]');
+
+                    if(!name || !email || !pass || !pass2){
+                        showSignupError('Please complete all required fields'); return;
+                    }
+                    if(pass !== pass2){ showSignupError('Passwords do not match'); return; }
+                    if(tos && !tos.checked){ showSignupError('You must accept Terms & Privacy'); return; }
+
+                    const users = getStoredUsers();
+                    if(users.find(u => u.email === email)){ showSignupError('An account with this email already exists'); return; }
+
+                    const newUser = { name, email, password: pass };
+                    users.push(newUser); saveUsers(users);
+                    setSession(newUser);
+                    closeAuth();
+                    if(typeof pendingAction === 'function'){ pendingAction(); pendingAction = null; }
+                });
+            }
+
+            function showSignupError(msg){
+                const existing = signupForm.querySelector('.auth-error'); if(existing) existing.remove();
+                const err = document.createElement('div'); err.className='auth-error'; err.textContent=msg;
+                signupForm.prepend(err);
+                setTimeout(()=>{ err.remove(); }, 3500);
+            }
+
+            function requireAuth(action){
+                if(isLoggedIn()) { try { action(); } catch(e){ console.error(e); } }
+                else { pendingAction = action; openAuth('login'); }
+            }
+
+            // Wire up wishlist icon clicks on product cards (protected)
+            document.querySelectorAll('.wishlist-icon').forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = icon.closest('.product-card');
+                    if (!card) return;
+                    const product = {
+                        id: card.dataset.title.toLowerCase().replace(/\s+/g, '-'),
+                        title: card.dataset.title,
+                        price: card.dataset.price || card.querySelector('.product-price')?.textContent || '',
+                        image: card.dataset.img || card.querySelector('img')?.src || ''
+                    };
+                    requireAuth(() => addToWishlist(product));
+                });
+            });
+
+            // initialize account UI and wishlist
+            updateAccountUI();
+            renderWishlist();
+
+            function closeCart() {
+                cartOverlay.classList.remove('active');
+                cartPanel.style.right = '-400px';
+                document.body.style.overflow = '';
+            }
+
+            // Add to cart functionality
+            function addToCart(product) {
+                const existingItem = cart.find(item => 
+                    item.id === product.id && 
+                    item.selectedColor === product.selectedColor
+                );
+
+                if (existingItem) {
+                    existingItem.quantity += product.quantity;
+                } else {
+                    cart.push(product);
+                }
+
+                updateCart();
+                
+                // Show notification
+                const notification = document.createElement('div');
+                notification.className = 'cart-notification';
+                notification.textContent = 'Item added to cart';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.classList.add('show');
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 300);
+                    }, 2000);
+                }, 100);
+            }
+
+            // Update cart display
+            function updateCart() {
+                const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCount.textContent = itemCount;
+                cartCount.style.display = itemCount > 0 ? 'flex' : 'none';
+
+                // Update cart items display
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item" data-id="${item.id}" data-color="${item.selectedColor}">
+                        <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <span class="cart-item-title">${item.title}</span>
+                            <div class="cart-item-color">
+                                <span class="color-dot" style="background-color: ${item.selectedColor}"></span>
+                            </div>
+                            <span class="cart-item-price">${item.price}</span>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn minus" onclick="updateQuantity('${item.id}', '${item.selectedColor}', -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn plus" onclick="updateQuantity('${item.id}', '${item.selectedColor}', 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart('${item.id}', '${item.selectedColor}')">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                    </div>
+                `).join('');
+
+                // Show empty cart message if no items
+                if (cart.length === 0) {
+                    cartItems.innerHTML = `
+                        <div class="empty-cart">
+                            <i class="fa-solid fa-shopping-cart"></i>
+                            <p>Your cart is empty</p>
+                        </div>
+                    `;
+                }
+
+                // Update total amount
+                // Compute total safely: normalize price strings (handles "Rs:", "Rs.", or plain numbers)
+                const total = cart.reduce((sum, item) => {
+                    try {
+                        // Remove any non-numeric characters except dot, comma and minus sign
+                        let priceStr = String(item.price || '').replace(/[^0-9.,-]/g, '');
+                        // Remove grouping commas and trim
+                        priceStr = priceStr.replace(/,/g, '').trim();
+                        const price = parseFloat(priceStr) || 0;
+                        const qty = Number(item.quantity) || 0;
+                        return sum + (price * qty);
+                    } catch (err) {
+                        // If parsing fails for any item, skip it to avoid breaking other scripts
+                        return sum;
+                    }
+                }, 0);
+                totalAmount.textContent = `Rs: ${total.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
+            }
+
+            // Remove item from cart
+            window.removeFromCart = function(id, color) {
+                cart = cart.filter(item => !(item.id === id && item.selectedColor === color));
+                updateCart();
+            };
+
+            // Update item quantity
+            window.updateQuantity = function(id, color, change) {
+                const item = cart.find(item => item.id === id && item.selectedColor === color);
+                if (item) {
+                    const newQuantity = item.quantity + change;
+                    if (newQuantity > 0) {
+                        item.quantity = newQuantity;
+                    } else {
+                        removeFromCart(id, color);
+                    }
+                    updateCart();
+                }
+            };
+
+            // Add to cart when clicking 'Add to Cart' button in modal (requires auth)
+            const modalAddBtn = document.querySelector('.modal-button.add-cart');
+            if(modalAddBtn){
+                modalAddBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const modalTitle = document.getElementById('modalTitle').textContent;
+                    const modalPrice = document.getElementById('modalPrice').textContent;
+                    const modalImg = document.getElementById('modalImg').src;
+                    const quantity = parseInt(document.getElementById('quantityInput').value) || 1;
+                    const selectedColor = document.querySelector('.modal-color-swatch.active').style.backgroundColor;
+
+                    const product = {
+                        id: modalTitle.toLowerCase().replace(/\s+/g, '-'),
+                        title: modalTitle,
+                        price: modalPrice,
+                        image: modalImg,
+                        quantity: quantity,
+                        selectedColor: selectedColor
+                    };
+
+                    requireAuth(() => { addToCart(product); modal.style.display = 'none'; });
+                });
+            }
+
+            // Protect checkout: require login before proceeding
+            const checkoutBtn = document.querySelector('.checkout-button');
+            if(checkoutBtn){
+                checkoutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    requireAuth(() => {
+                        // Placeholder: replace with real checkout redirect
+                        alert('Proceeding to checkout (placeholder)');
+                    });
+                });
+            }
+        });
+
+        // note
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Get all the elements
+            const slides = document.querySelectorAll('.text-slide');
+            const prevBtn = document.getElementById('prevText');
+            const nextBtn = document.getElementById('nextText');
+            const container = document.querySelector('.text-slider-container');
+            
+            let currentIndex = 0;
+            const numSlides = slides.length;
+
+            // Autoplay configuration (milliseconds)
+            const AUTOPLAY_DELAY = 4000; // 4s per slide
+            let autoplayInterval = null;
+
+            // This function shows the slide with the FADE effect
+            function showSlide(index) {
+                // Check boundaries and loop
+                if (index >= numSlides) {
+                    currentIndex = 0; // Go to first slide
+                } else if (index < 0) {
+                    currentIndex = numSlides - 1; // Go to last slide
+                } else {
+                    currentIndex = index;
+                }
+
+                // Loop through ALL slides
+                slides.forEach((slide, i) => {
+                    if (i === currentIndex) {
+                        // Show the current slide
+                        slide.classList.add('active');
+                    } else {
+                        // Hide all other slides
+                        slide.classList.remove('active');
+                    }
+                });
+            }
+
+            // Autoplay controls
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayInterval = setInterval(() => {
+                    showSlide(currentIndex + 1);
+                }, AUTOPLAY_DELAY);
+            }
+
+            function stopAutoplay() {
+                if (autoplayInterval) {
+                    clearInterval(autoplayInterval);
+                    autoplayInterval = null;
+                }
+            }
+
+            // Pause on hover / focus for accessibility
+            if (container) {
+                container.addEventListener('mouseenter', stopAutoplay);
+                container.addEventListener('mouseleave', startAutoplay);
+                container.addEventListener('focusin', stopAutoplay);
+                container.addEventListener('focusout', startAutoplay);
+            }
+
+            // Pause when the tab is not visible
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) stopAutoplay(); else startAutoplay();
+            });
+
+            // --- Event Listeners ---
+            nextBtn.addEventListener('click', () => {
+                showSlide(currentIndex + 1);
+                startAutoplay(); // reset timer
+            });
+
+            prevBtn.addEventListener('click', () => {
+                showSlide(currentIndex - 1);
+                startAutoplay(); // reset timer
+            });
+
+            // Initialize slider to the first slide and start autoplay
+            showSlide(0);
+            startAutoplay();
+        });
+
+        // nav
+
+        (function(){
+             const btn = document.querySelector('.mobile-nav-toggle');
+             const nav = document.getElementById('primary-navigation');
+             const navTop = document.querySelector('.nav_top');
+
+             if (!btn || !nav) return;
+
+             btn.addEventListener('click', () => {
+               const expanded = btn.getAttribute('aria-expanded') === 'true';
+               btn.setAttribute('aria-expanded', String(!expanded));
+               nav.classList.toggle('open');
+               nav.setAttribute('aria-hidden', String(expanded));
+               navTop.classList.toggle('nav-open');
+             });
+
+             // Close when clicking outside
+             document.addEventListener('click', (e) => {
+               if (!navTop.contains(e.target) && nav.classList.contains('open')) {
+                 btn.setAttribute('aria-expanded', 'false');
+                 nav.classList.remove('open');
+                 nav.setAttribute('aria-hidden', 'true');
+                 navTop.classList.remove('nav-open');
+               }
+             });
+                    })();
+    </script>
+
+    <script>
+        // Search toggle: click icon to expand/collapse the search input
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchContainer = document.querySelector('.search-container');
+            if (!searchContainer) return;
+            const searchBtn = searchContainer.querySelector('button');
+            const searchInput = searchContainer.querySelector('input');
+
+            // start collapsed
+            searchContainer.classList.remove('open');
+
+            searchBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // toggle open state
+                const isOpen = searchContainer.classList.contains('open');
+                if (!isOpen) {
+                    searchContainer.classList.add('open');
+                    // focus input when expanded
+                    setTimeout(() => searchInput.focus(), 50);
+                } else {
+                    // if input has text, you might submit here; otherwise collapse
+                    if (searchInput.value.trim() === '') {
+                        searchContainer.classList.remove('open');
+                    } else {
+                        // optionally perform a search - for now just keep open
+                        // implement search action if desired
+                    }
+                }
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!searchContainer.contains(e.target)) {
+                    if (searchContainer.classList.contains('open')) {
+                        searchContainer.classList.remove('open');
+                    }
+                }
+            });
+
+            // Pressing Escape closes the search
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && searchContainer.classList.contains('open')) {
+                    searchContainer.classList.remove('open');
+                    searchInput.blur();
+                }
+            });
+        });
+    </script>
+
+    <!-- header hide-on-scroll removed to make header non-sticky; headers now participate in normal document flow -->
+    <script>
+        // Hide header (text slider + nav) on scroll down, show on scroll up.
+        document.addEventListener('DOMContentLoaded', () => {
+            const textSlider = document.querySelector('.text-slider-container');
+            const nav = document.querySelector('.nav_top');
+            const root = document.documentElement;
+            if (!textSlider || !nav) return;
+
+            // Helper to set CSS vars used to offset the slider
+            function setHeights() {
+                const tsHeight = textSlider.classList.contains('hidden') ? 0 : textSlider.offsetHeight;
+                const navHeight = nav.classList.contains('hidden') ? 0 : nav.offsetHeight;
+                root.style.setProperty('--text-slider-h', tsHeight + 'px');
+                root.style.setProperty('--nav-h', navHeight + 'px');
+            }
+
+            // initialize measured heights
+            setHeights();
+
+            let lastY = window.scrollY || window.pageYOffset;
+            let ticking = false;
+            const DELTA = 5; // avoid tiny jitter
+
+            function onScroll() {
+                const currentY = window.scrollY || window.pageYOffset;
+                const diff = currentY - lastY;
+
+                if (Math.abs(diff) < DELTA) { ticking = false; return; }
+
+                if (diff > 0 && currentY > 50) {
+                    // scroll down -> hide
+                    if (!textSlider.classList.contains('hidden')) {
+                        textSlider.classList.add('hidden');
+                        nav.classList.add('hidden');
+                        // move them visually up using transform
+                        textSlider.style.transform = 'translateY(-100%)';
+                        nav.style.transform = 'translateY(-100%)';
+                        // update offsets so content moves up
+                        setHeights();
+                    }
+                } else {
+                    // scroll up -> show
+                    if (textSlider.classList.contains('hidden')) {
+                        textSlider.classList.remove('hidden');
+                        nav.classList.remove('hidden');
+                        textSlider.style.transform = '';
+                        nav.style.transform = '';
+                        setHeights();
+                    }
+                }
+
+                lastY = currentY <= 0 ? 0 : currentY;
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
+            }, { passive: true });
+
+            window.addEventListener('resize', () => { setTimeout(setHeights, 120); });
+
+            // If page loaded scrolled, hide headers initially
+            if ((window.scrollY || window.pageYOffset) > 80) {
+                textSlider.classList.add('hidden');
+                nav.classList.add('hidden');
+                textSlider.style.transform = 'translateY(-100%)';
+                nav.style.transform = 'translateY(-100%)';
+                setHeights();
+            }
+        });
+    </script>
+
+    <section class="reviews-section">
+        <h2>What Our Customers Say</h2>
+
+        <div class="reviews-grid">
+
+            <!-- Review Card 1 -->
+            <div class="review-card">
+                <div class="review-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">Absolutely stunning timepiece! The quality is exceptional and it looks even better in person. Delivery was fast and the packaging was beautiful. Highly recommend.</p>
+                <div class="review-author-info">
+                    <div class="review-avatar">
+                        <img src="https://placehold.co/50x50/e74c3c/ffffff?text=P" alt="User Avatar">
+                    </div>
+                    <div>
+                        <span class="review-author">Priya Sharma</span>
+                        <span class="review-status">Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Card 2 -->
+            <div class="review-card">
+                <div class="review-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star empty"></i> <!-- 4 stars -->
+                </div>
+                <p class="review-text">I bought the leather handbag and I'm very happy with it. The leather is soft and it's the perfect size. My only small complaint is that the blue color is slightly darker than the photo.</p>
+                <div class="review-author-info">
+                    <div class="review-avatar">
+                        <img src="https://placehold.co/50x50/3498db/ffffff?text=R" alt="User Avatar">
+                    </div>
+                    <div>
+                        <span class="review-author">Rohan Gupta</span>
+                        <span class="review-status">Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Card 3 -->
+            <div class="review-card">
+                <div class="review-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">These are the best headphones I've ever owned. The noise cancellation is incredible, and they are so comfortable. Worth every rupee! I'm planning to buy another pair for my wife.</p>
+                <div class="review-author-info">
+                    <div class="review-avatar">
+                        <img src="https://placehold.co/50x50/2ecc71/ffffff?text=A" alt="User Avatar">
+                    </div>
+                    <div>
+                        <span class="review-author">Aarav Patel</span>
+                        <span class="review-status">Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer-section">
+        <div class="footer-container">
+
+            <!-- Column 1: About -->
+            <div class="footer-col">
+                <h3 class="footer-title">OUR STORE</h3>
+                <p class="footer-about">
+                    Crafting unique, high-quality products for the modern lifestyle.
+                    Experience luxury and style in every detail.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="footer-col">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop All</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Help & Support -->
+            <div class="footer-col">
+                <h3 class="footer-title">Help & Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">Track Your Order</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Newsletter -->
+            <div class="footer-col">
+                <h3 class="footer-title">Join Our Newsletter</h3>
+                <p class="footer-about">Get updates on new arrivals and exclusive sales.</p>
+                <form class="newsletter-form" aria-label="Newsletter signup">
+                    <input type="email" placeholder="Your email address" aria-label="Your email address">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 <a href="#">Our Store.</a> All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    </footer>
+
+        <!-- Smooth-scroll JS fallback for same-page anchor links -->
+        <script>
+            (function(){
+                // Capture clicks on links that reference an ID (href="#something")
+                document.addEventListener('click', function(e){
+                    var link = e.target.closest('a[href^="#"]');
+                    if(!link) return;
+                    var href = link.getAttribute('href');
+                    // ignore plain '#' which is often used as a noop link
+                    if(!href || href === '#') return;
+                    try {
+                        var target = document.querySelector(href);
+                        if(target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            // update URL without jumping
+                            history.pushState(null, '', href);
+                        }
+                    } catch (err) {
+                        // If href is not a valid selector, do nothing
+                    }
+                }, false);
+            })();
+        </script>
+
+    </body>
+</html>
